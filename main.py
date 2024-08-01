@@ -46,7 +46,6 @@ results = []
 for i in range(500):
     asset_class = random.choice(asset_classes)
     instrument_id = random.choice(instrument_ids)
-    # instrument_name = random.choice(instrument_names)
     counterparty = random.choice(first_names) + " " + random.choice(last_names)
     data_source_name = random.choice(data_source_names)
     results.append(Results(
