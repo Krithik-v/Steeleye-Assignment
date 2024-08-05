@@ -225,7 +225,7 @@ async def filter_trades(
 ):
     """
     Returns the filtered trades based on the values provided.
-    NOTE: Does **OR** `filter` operation.
+   
 
     :param page:
     :param trades:
