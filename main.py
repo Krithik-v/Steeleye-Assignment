@@ -4,7 +4,6 @@ from fastapi import FastAPI, Depends
 from fastapi.exceptions import HTTPException
 import datetime as dt
 from typing import Optional
-from pydantic import BaseModel, Field
 import json
 from pathlib import Path
 from pydantic_models import Trade, Trades
@@ -12,40 +11,6 @@ from typing import List
 
 app = FastAPI()
 TRADES_DATA_FILE = Path("trades_data.json")
-
-
-class Results(BaseModel):
-    asset_class: str = Field(
-        alias="assestClass",
-        description="Asset class of the order. Ex:-Equity,Bond,etc..",
-    )
-    counterparty: str = Field(
-        alias="countpartyName", description="Counterparty of the order who assited"
-    )
-    data_source_name: str = Field(
-        alias="dataSourceName",
-        description="The name of the data source through which order the was placed",
-    )
-    instrument_id: str = Field(
-        alias="instrumentId",
-        description="The ID of the data source which was ordered. Ex:- GOOG,APL,IBM",
-    )
-    instrument_name: str = Field(
-        alias="instrumentName", description="The name of the instrument ordered."
-    )
-    order_submit: dt.datetime = Field(
-        alias="orderSubmitted", description="The date-time the order was submitted"
-    )
-    purchase_type: str = Field(
-        alias="purchaseType", description="A value of BUY for buys, SELL for sells"
-    )
-    order_price: float = Field(
-        alias="tradePrice", description="The price of the Trade."
-    )
-    trade_quantity: int = Field(
-        alias="quantity", description="The amount of units ordered"
-    )
-    order_Id: str = Field(alias="orderID", description="Id of the trade done.")
 
 
 async def load_trades_data() -> List[Trade]:
@@ -225,18 +190,6 @@ async def filter_trades(
 ):
     """
     Returns the filtered trades based on the values provided.
-   
-
-    :param page:
-    :param trades:
-    :param page_rate:
-    :param asset_class:
-    :param max_price:
-    :param min_price:
-    :param trade_type:
-    :param sort_by:
-    :param is_desc:
-    :return:
     """
     page = page - 1
     if page_rate <= 0:
